@@ -12,9 +12,9 @@ const queryClient = new QueryClient({
 });
 
 const navItems = [
-  { to: '/ingredients', label: 'Ingredients' },
-  { to: '/recipes', label: 'Recipes' },
-  { to: '/meal-plans', label: 'Meal Plans' },
+  { to: '/ingredientes', label: 'Ingredientes' },
+  { to: '/recetas', label: 'Recetas' },
+  { to: '/planes-comida', label: 'Planes de comida' },
 ];
 
 export default function App() {
@@ -24,7 +24,7 @@ export default function App() {
         <div className="min-h-screen bg-gray-50">
           <nav className="bg-white border-b shadow-sm sticky top-0 z-40">
             <div className="max-w-3xl mx-auto px-4 flex items-center gap-8 h-14">
-              <span className="font-bold text-green-600 text-lg">Recipe Manager</span>
+              <span className="font-bold text-green-600 text-lg">Gestor de recetas</span>
               {navItems.map(({ to, label }) => (
                 <NavLink
                   key={to}
@@ -41,11 +41,11 @@ export default function App() {
           <main>
             <Routes>
               <Route path="/" element={<IngredientsPage />} />
-              <Route path="/ingredients" element={<IngredientsPage />} />
-              <Route path="/recipes" element={<RecipesPage />} />
-              <Route path="/recipes/:id" element={<RecipeDetailPage />} />
-              <Route path="/meal-plans" element={<MealPlansPage />} />
-              <Route path="/meal-plans/:id" element={<MealPlanDetailPage />} />
+              <Route path="/ingredientes" element={<IngredientsPage />} />
+              <Route path="/recetas" element={<RecipesPage />} />
+              <Route path="/recetas/:id" element={<RecipeDetailPage />} />
+              <Route path="/planes-comida" element={<MealPlansPage />} />
+              <Route path="/planes-comida/:id" element={<MealPlanDetailPage />} />
             </Routes>
           </main>
         </div>

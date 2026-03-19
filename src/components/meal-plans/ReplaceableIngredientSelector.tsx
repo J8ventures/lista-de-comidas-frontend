@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { RecipeIngredient } from '../../types';
+import { IngredienteReceta } from '../../types';
 import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
 
 interface ReplaceableIngredientSelectorProps {
   open: boolean;
-  replaceableIngredients: RecipeIngredient[];
+  replaceableIngredients: IngredienteReceta[];
   onConfirm: (selected: Record<string, string>) => void;
   onCancel: () => void;
 }
@@ -14,52 +14,52 @@ export const ReplaceableIngredientSelector: React.FC<ReplaceableIngredientSelect
   open, replaceableIngredients, onConfirm, onCancel,
 }) => {
   const [selected, setSelected] = useState<Record<string, string>>(() =>
-    Object.fromEntries(replaceableIngredients.map(ri => [ri.ingredient_id, ri.ingredient_id]))
+    Object.fromEntries(replaceableIngredients.map(ri => [ri.id_ingrediente, ri.id_ingrediente]))
   );
 
   const handleConfirm = () => {
-    const allCovered = replaceableIngredients.every(ri => selected[ri.ingredient_id]);
+    const allCovered = replaceableIngredients.every(ri => selected[ri.id_ingrediente]);
     if (!allCovered) return;
     onConfirm(selected);
   };
 
   return (
-    <Modal open={open} onClose={onCancel} title="Select alternative ingredients" size="md">
+    <Modal open={open} onClose={onCancel} title="Seleccionar ingredientes alternativos" size="md">
       <div className="flex flex-col gap-4">
         {replaceableIngredients.map(ri => (
-          <div key={ri.ingredient_id}>
+          <div key={ri.id_ingrediente}>
             <p className="text-sm font-medium text-gray-700 mb-2">
-              {ri.ingredient?.name ?? ri.ingredient_id} -- {ri.quantity} {ri.unit}
+              {ri.ingrediente?.nombre ?? ri.id_ingrediente} -- {ri.cantidad} {ri.unidad}
             </p>
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2 text-sm">
                 <input
                   type="radio"
-                  name={ri.ingredient_id}
-                  value={ri.ingredient_id}
-                  checked={selected[ri.ingredient_id] === ri.ingredient_id}
-                  onChange={() => setSelected(s => ({ ...s, [ri.ingredient_id]: ri.ingredient_id }))}
+                  name={ri.id_ingrediente}
+                  value={ri.id_ingrediente}
+                  checked={selected[ri.id_ingrediente] === ri.id_ingrediente}
+                  onChange={() => setSelected(s => ({ ...s, [ri.id_ingrediente]: ri.id_ingrediente }))}
                 />
-                {ri.ingredient?.name ?? ri.ingredient_id} (original)
+                {ri.ingrediente?.nombre ?? ri.id_ingrediente} (original)
               </label>
-              {ri.alternatives.map(alt => (
-                <label key={alt.ingredient_id} className="flex items-center gap-2 text-sm">
+              {ri.alternativas.map(alt => (
+                <label key={alt.id_ingrediente} className="flex items-center gap-2 text-sm">
                   <input
                     type="radio"
-                    name={ri.ingredient_id}
-                    value={alt.ingredient_id}
-                    checked={selected[ri.ingredient_id] === alt.ingredient_id}
-                    onChange={() => setSelected(s => ({ ...s, [ri.ingredient_id]: alt.ingredient_id }))}
+                    name={ri.id_ingrediente}
+                    value={alt.id_ingrediente}
+                    checked={selected[ri.id_ingrediente] === alt.id_ingrediente}
+                    onChange={() => setSelected(s => ({ ...s, [ri.id_ingrediente]: alt.id_ingrediente }))}
                   />
-                  {alt.ingredient?.name ?? alt.ingredient_id} -- {alt.quantity} {alt.unit}
+                  {alt.ingrediente?.nombre ?? alt.id_ingrediente} -- {alt.cantidad} {alt.unidad}
                 </label>
               ))}
             </div>
           </div>
         ))}
         <div className="flex gap-3 justify-end mt-2">
-          <Button variant="secondary" onClick={onCancel}>Cancel</Button>
-          <Button onClick={handleConfirm}>Confirm</Button>
+          <Button variant="secondary" onClick={onCancel}>Cancelar</Button>
+          <Button onClick={handleConfirm}>Confirmar</Button>
         </div>
       </div>
     </Modal>

@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Ingredient, IngredientCreate, NutritionalGroup } from '../../types';
+import { Ingrediente, IngredienteCrear, GrupoNutricional } from '../../types';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
 import { Button } from '../ui/Button';
 
-const NUTRITIONAL_GROUPS: NutritionalGroup[] = [
-  'PROTEINS', 'CARBOHYDRATES', 'VEGETABLES', 'FRUITS', 'DAIRY', 'FATS', 'LEGUMES', 'GRAINS', 'OTHER'
+const GRUPOS_NUTRICIONALES: GrupoNutricional[] = [
+  'PROTEINAS', 'CARBOHIDRATOS', 'VERDURAS', 'FRUTAS', 'LACTEOS', 'GRASAS', 'LEGUMBRES', 'CEREALES', 'OTRO'
 ];
 
 interface IngredientFormProps {
-  initial?: Ingredient;
-  onSubmit: (data: IngredientCreate) => Promise<void>;
+  initial?: Ingrediente;
+  onSubmit: (data: IngredienteCrear) => Promise<void>;
   onCancel: () => void;
   loading?: boolean;
 }
 
 export const IngredientForm: React.FC<IngredientFormProps> = ({ initial, onSubmit, onCancel, loading }) => {
-  const [form, setForm] = useState<IngredientCreate>({
-    name: initial?.name ?? '',
-    nutritional_group: initial?.nutritional_group ?? 'OTHER',
-    unit: initial?.unit ?? '',
+  const [form, setForm] = useState<IngredienteCrear>({
+    nombre: initial?.nombre ?? '',
+    grupo_nutricional: initial?.grupo_nutricional ?? 'OTRO',
+    unidad: initial?.unidad ?? '',
   });
 
   useEffect(() => {
-    if (initial) setForm({ name: initial.name, nutritional_group: initial.nutritional_group, unit: initial.unit });
+    if (initial) setForm({ nombre: initial.nombre, grupo_nutricional: initial.grupo_nutricional, unidad: initial.unidad });
   }, [initial]);
 
-  const handle = (field: keyof IngredientCreate) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+  const handle = (field: keyof IngredienteCrear) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm(f => ({ ...f, [field]: e.target.value }));
 
   const submit = async (e: React.FormEvent) => {
@@ -36,17 +36,17 @@ export const IngredientForm: React.FC<IngredientFormProps> = ({ initial, onSubmi
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-4">
-      <Input label="Name" value={form.name} onChange={handle('name')} required />
+      <Input label="Nombre" value={form.nombre} onChange={handle('nombre')} required />
       <Select
-        label="Nutritional Group"
-        value={form.nutritional_group}
-        onChange={handle('nutritional_group')}
-        options={NUTRITIONAL_GROUPS.map(g => ({ value: g, label: g }))}
+        label="Grupo nutricional"
+        value={form.grupo_nutricional}
+        onChange={handle('grupo_nutricional')}
+        options={GRUPOS_NUTRICIONALES.map(g => ({ value: g, label: g }))}
       />
-      <Input label="Unit (e.g. g, ml, unit)" value={form.unit} onChange={handle('unit')} required />
+      <Input label="Unidad (ej. g, ml, unidad)" value={form.unidad} onChange={handle('unidad')} required />
       <div className="flex gap-3 justify-end">
-        <Button type="button" variant="secondary" onClick={onCancel}>Cancel</Button>
-        <Button type="submit" loading={loading}>{initial ? 'Update' : 'Create'}</Button>
+        <Button type="button" variant="secondary" onClick={onCancel}>Cancelar</Button>
+        <Button type="submit" loading={loading}>{initial ? 'Actualizar' : 'Crear'}</Button>
       </div>
     </form>
   );

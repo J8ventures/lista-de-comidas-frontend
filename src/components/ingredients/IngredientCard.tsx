@@ -1,26 +1,26 @@
 import React from 'react';
-import { Ingredient } from '../../types';
+import { Ingrediente } from '../../types';
 import { Card } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 
 interface IngredientCardProps {
-  ingredient: Ingredient;
-  onEdit: (ingredient: Ingredient) => void;
+  ingrediente: Ingrediente;
+  onEdit: (ingrediente: Ingrediente) => void;
   onDelete: (id: string) => void;
 }
 
-export const IngredientCard: React.FC<IngredientCardProps> = ({ ingredient, onEdit, onDelete }) => (
+export const IngredientCard: React.FC<IngredientCardProps> = ({ ingrediente, onEdit, onDelete }) => (
   <Card>
     <div className="p-4 flex items-center justify-between">
       <div>
-        <p className="font-medium text-gray-900">{ingredient.name}</p>
-        <p className="text-sm text-gray-500 mt-0.5">Unit: {ingredient.unit}</p>
-        <Badge label={ingredient.nutritional_group} className="mt-1" />
+        <p className="font-medium text-gray-900">{ingrediente.nombre}</p>
+        <p className="text-sm text-gray-500 mt-0.5">Unidad: {ingrediente.unidad}</p>
+        <Badge label={ingrediente.grupo_nutricional} className="mt-1" />
       </div>
       <div className="flex gap-2">
-        <Button size="sm" variant="secondary" onClick={() => onEdit(ingredient)}>Edit</Button>
-        <Button size="sm" variant="danger" onClick={() => onDelete(ingredient.id)}>Delete</Button>
+        <Button size="sm" variant="secondary" onClick={() => onEdit(ingrediente)}>Editar</Button>
+        <Button size="sm" variant="danger" onClick={() => onDelete(ingrediente.id)}>Eliminar</Button>
       </div>
     </div>
   </Card>

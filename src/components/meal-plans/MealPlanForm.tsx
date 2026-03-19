@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { MealPlanCreate, PlanType } from '../../types';
+import { PlanComidaCrear, TipoPlan } from '../../types';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
 import { Button } from '../ui/Button';
 
-const PLAN_TYPES: PlanType[] = ['weekly', 'biweekly'];
+const TIPOS_PLAN: TipoPlan[] = ['semanal', 'quincenal'];
 
 interface MealPlanFormProps {
-  onSubmit: (data: MealPlanCreate) => Promise<void>;
+  onSubmit: (data: PlanComidaCrear) => Promise<void>;
   onCancel: () => void;
   loading?: boolean;
 }
 
 export const MealPlanForm: React.FC<MealPlanFormProps> = ({ onSubmit, onCancel, loading }) => {
-  const [form, setForm] = useState<MealPlanCreate>({
-    name: '', type: 'weekly', start_date: '', end_date: '', entries: [],
+  const [form, setForm] = useState<PlanComidaCrear>({
+    nombre: '', tipo: 'semanal', fecha_inicio: '', fecha_fin: '', entradas: [],
   });
 
-  const handle = (field: keyof MealPlanCreate) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+  const handle = (field: keyof PlanComidaCrear) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm(f => ({ ...f, [field]: e.target.value }));
 
   const submit = async (e: React.FormEvent) => {
@@ -27,13 +27,13 @@ export const MealPlanForm: React.FC<MealPlanFormProps> = ({ onSubmit, onCancel, 
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-4">
-      <Input label="Name" value={form.name} onChange={handle('name')} required />
-      <Select label="Type" value={form.type} onChange={handle('type')} options={PLAN_TYPES.map(t => ({ value: t, label: t }))} />
-      <Input label="Start date" type="date" value={form.start_date} onChange={handle('start_date')} required />
-      <Input label="End date" type="date" value={form.end_date} onChange={handle('end_date')} required />
+      <Input label="Nombre" value={form.nombre} onChange={handle('nombre')} required />
+      <Select label="Tipo" value={form.tipo} onChange={handle('tipo')} options={TIPOS_PLAN.map(t => ({ value: t, label: t }))} />
+      <Input label="Fecha de inicio" type="date" value={form.fecha_inicio} onChange={handle('fecha_inicio')} required />
+      <Input label="Fecha de fin" type="date" value={form.fecha_fin} onChange={handle('fecha_fin')} required />
       <div className="flex gap-3 justify-end">
-        <Button type="button" variant="secondary" onClick={onCancel}>Cancel</Button>
-        <Button type="submit" loading={loading}>Create</Button>
+        <Button type="button" variant="secondary" onClick={onCancel}>Cancelar</Button>
+        <Button type="submit" loading={loading}>Crear</Button>
       </div>
     </form>
   );

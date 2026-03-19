@@ -1,19 +1,19 @@
 import { api } from './api';
-import { Ingredient, IngredientCreate, NutritionalGroup } from '../types';
+import { Ingrediente, IngredienteCrear, GrupoNutricional } from '../types';
 
 export const ingredientsService = {
-  list: (nutritional_group?: NutritionalGroup) =>
-    api.get<Ingredient[]>('/ingredients', { params: nutritional_group ? { nutritional_group } : {} }).then(r => r.data),
+  list: (grupo_nutricional?: GrupoNutricional) =>
+    api.get<Ingrediente[]>('/ingredientes', { params: grupo_nutricional ? { grupo_nutricional } : {} }).then(r => r.data),
 
   get: (id: string) =>
-    api.get<Ingredient>(`/ingredients/${id}`).then(r => r.data),
+    api.get<Ingrediente>(`/ingredientes/${id}`).then(r => r.data),
 
-  create: (data: IngredientCreate) =>
-    api.post<Ingredient>('/ingredients', data).then(r => r.data),
+  create: (data: IngredienteCrear) =>
+    api.post<Ingrediente>('/ingredientes', data).then(r => r.data),
 
-  update: (id: string, data: Partial<IngredientCreate>) =>
-    api.put<Ingredient>(`/ingredients/${id}`, data).then(r => r.data),
+  update: (id: string, data: Partial<IngredienteCrear>) =>
+    api.put<Ingrediente>(`/ingredientes/${id}`, data).then(r => r.data),
 
   delete: (id: string) =>
-    api.delete(`/ingredients/${id}`),
+    api.delete(`/ingredientes/${id}`),
 };

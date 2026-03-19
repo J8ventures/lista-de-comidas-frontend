@@ -1,113 +1,113 @@
-export type NutritionalGroup =
-  | 'PROTEINS' | 'CARBOHYDRATES' | 'VEGETABLES' | 'FRUITS'
-  | 'DAIRY' | 'FATS' | 'LEGUMES' | 'GRAINS' | 'OTHER';
+export type GrupoNutricional =
+  | 'PROTEINAS' | 'CARBOHIDRATOS' | 'VERDURAS' | 'FRUTAS'
+  | 'LACTEOS' | 'GRASAS' | 'LEGUMBRES' | 'CEREALES' | 'OTRO';
 
-export type IngredientRole = 'required' | 'replaceable' | 'optional';
-export type MealType = 'breakfast' | 'lunch' | 'dinner' | 'snack';
-export type PlanType = 'weekly' | 'biweekly';
+export type RolIngrediente = 'requerido' | 'reemplazable' | 'opcional';
+export type TipoComida = 'desayuno' | 'almuerzo' | 'cena' | 'merienda';
+export type TipoPlan = 'semanal' | 'quincenal';
 
-export interface Ingredient {
+export interface Ingrediente {
   id: string;
-  name: string;
-  nutritional_group: NutritionalGroup;
-  unit: string;
-  created_at?: string;
-  updated_at?: string;
+  nombre: string;
+  grupo_nutricional: GrupoNutricional;
+  unidad: string;
+  creado_en?: string;
+  actualizado_en?: string;
 }
 
-export interface Alternative {
-  ingredient_id: string;
-  ingredient?: Ingredient;
-  quantity: number;
-  unit: string;
+export interface Alternativa {
+  id_ingrediente: string;
+  ingrediente?: Ingrediente;
+  cantidad: number;
+  unidad: string;
 }
 
-export interface RecipeIngredient {
-  ingredient_id: string;
-  ingredient?: Ingredient;
-  role: IngredientRole;
-  quantity: number;
-  unit: string;
-  alternatives: Alternative[];
+export interface IngredienteReceta {
+  id_ingrediente: string;
+  ingrediente?: Ingrediente;
+  rol: RolIngrediente;
+  cantidad: number;
+  unidad: string;
+  alternativas: Alternativa[];
 }
 
-export interface Recipe {
+export interface Receta {
   id: string;
-  name: string;
-  description: string;
-  servings: number;
-  prep_time: number;
-  cook_time: number;
-  ingredients?: RecipeIngredient[];
-  created_at?: string;
-  updated_at?: string;
+  nombre: string;
+  descripcion: string;
+  porciones: number;
+  tiempo_preparacion: number;
+  tiempo_coccion: number;
+  ingredientes?: IngredienteReceta[];
+  creado_en?: string;
+  actualizado_en?: string;
 }
 
-export interface MealPlanEntry {
+export interface EntradaPlanComida {
   id: string;
-  date: string;
-  meal_type: MealType;
-  recipe_id: string;
-  recipe?: Recipe;
-  selected_ingredients: Record<string, string>;
+  fecha: string;
+  tipo_comida: TipoComida;
+  id_receta: string;
+  receta?: Receta;
+  ingredientes_seleccionados: Record<string, string>;
 }
 
-export interface MealPlan {
+export interface PlanComida {
   id: string;
-  name: string;
-  type: PlanType;
-  start_date: string;
-  end_date: string;
-  entries?: MealPlanEntry[];
-  created_at?: string;
-  updated_at?: string;
+  nombre: string;
+  tipo: TipoPlan;
+  fecha_inicio: string;
+  fecha_fin: string;
+  entradas?: EntradaPlanComida[];
+  creado_en?: string;
+  actualizado_en?: string;
 }
 
-export interface GroceryItem {
-  ingredient: Ingredient;
-  quantity: number;
-  unit: string;
+export interface ArticuloCompra {
+  ingrediente: Ingrediente;
+  cantidad: number;
+  unidad: string;
 }
 
-export interface GroceryList {
-  required: GroceryItem[];
-  optional: GroceryItem[];
+export interface ListaCompras {
+  requeridos: ArticuloCompra[];
+  opcionales: ArticuloCompra[];
 }
 
-export interface IngredientCreate {
-  name: string;
-  nutritional_group: NutritionalGroup;
-  unit: string;
+export interface IngredienteCrear {
+  nombre: string;
+  grupo_nutricional: GrupoNutricional;
+  unidad: string;
 }
 
-export interface RecipeIngredientCreate {
-  ingredient_id: string;
-  role: IngredientRole;
-  quantity: number;
-  unit: string;
-  alternatives: { ingredient_id: string; quantity: number; unit: string }[];
+export interface IngredienteRecetaCrear {
+  id_ingrediente: string;
+  rol: RolIngrediente;
+  cantidad: number;
+  unidad: string;
+  alternativas: { id_ingrediente: string; cantidad: number; unidad: string }[];
 }
 
-export interface RecipeCreate {
-  name: string;
-  description?: string;
-  servings?: number;
-  prep_time?: number;
-  cook_time?: number;
-  ingredients?: RecipeIngredientCreate[];
+export interface RecetaCrear {
+  nombre: string;
+  descripcion?: string;
+  porciones?: number;
+  tiempo_preparacion?: number;
+  tiempo_coccion?: number;
+  ingredientes?: IngredienteRecetaCrear[];
 }
 
-export interface MealPlanEntryCreate {
-  date: string;
-  meal_type: MealType;
-  recipe_id: string;
-  selected_ingredients?: Record<string, string>;
+export interface EntradaPlanCrear {
+  fecha: string;
+  tipo_comida: TipoComida;
+  id_receta: string;
+  ingredientes_seleccionados?: Record<string, string>;
 }
 
-export interface MealPlanCreate {
-  name: string;
-  type: PlanType;
-  start_date: string;
-  end_date: string;
-  entries?: MealPlanEntryCreate[];
+export interface PlanComidaCrear {
+  nombre: string;
+  tipo: TipoPlan;
+  fecha_inicio: string;
+  fecha_fin: string;
+  entradas?: EntradaPlanCrear[];
 }

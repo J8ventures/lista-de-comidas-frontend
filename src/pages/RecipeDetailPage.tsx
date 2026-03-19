@@ -8,18 +8,18 @@ import { Button } from '../components/ui/Button';
 export const RecipeDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { data: recipe, isLoading } = useRecipe(id!);
+  const { data: receta, isLoading } = useRecipe(id!);
 
   if (isLoading) return <Spinner />;
-  if (!recipe) return <p className="text-center text-gray-500 py-8">Recipe not found.</p>;
+  if (!receta) return <p className="text-center text-gray-500 py-8">Receta no encontrada.</p>;
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <div className="flex items-center gap-4 mb-6">
-        <Button variant="ghost" onClick={() => navigate('/recipes')}>&larr; Back</Button>
-        <h1 className="text-xl font-bold text-gray-900">{recipe.name}</h1>
+        <Button variant="ghost" onClick={() => navigate('/recetas')}>&larr; Volver</Button>
+        <h1 className="text-xl font-bold text-gray-900">{receta.nombre}</h1>
       </div>
-      <RecipeDetail recipe={recipe} />
+      <RecipeDetail receta={receta} />
     </div>
   );
 };

@@ -1,19 +1,19 @@
 import { api } from './api';
-import { Recipe, RecipeCreate } from '../types';
+import { Receta, RecetaCrear } from '../types';
 
 export const recipesService = {
-  list: (params?: { ingredient_id?: string; nutritional_group?: string }) =>
-    api.get<Recipe[]>('/recipes', { params }).then(r => r.data),
+  list: (params?: { id_ingrediente?: string; grupo_nutricional?: string }) =>
+    api.get<Receta[]>('/recetas', { params }).then(r => r.data),
 
   get: (id: string) =>
-    api.get<Recipe>(`/recipes/${id}`).then(r => r.data),
+    api.get<Receta>(`/recetas/${id}`).then(r => r.data),
 
-  create: (data: RecipeCreate) =>
-    api.post<Recipe>('/recipes', data).then(r => r.data),
+  create: (data: RecetaCrear) =>
+    api.post<Receta>('/recetas', data).then(r => r.data),
 
-  update: (id: string, data: Partial<RecipeCreate>) =>
-    api.put<Recipe>(`/recipes/${id}`, data).then(r => r.data),
+  update: (id: string, data: Partial<RecetaCrear>) =>
+    api.put<Receta>(`/recetas/${id}`, data).then(r => r.data),
 
   delete: (id: string) =>
-    api.delete(`/recipes/${id}`),
+    api.delete(`/recetas/${id}`),
 };
