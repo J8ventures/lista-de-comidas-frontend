@@ -10,12 +10,20 @@ interface MealPlanListProps {
   onDelete: (id: string) => void;
 }
 
-export const MealPlanList: React.FC<MealPlanListProps> = ({ planes, loading, onView, onDelete }) => {
+export const MealPlanList: React.FC<MealPlanListProps> = ({
+  planes,
+  loading,
+  onView,
+  onDelete,
+}) => {
   if (loading) return <Spinner />;
-  if (!planes.length) return <p className="text-center text-gray-500 py-8">No se encontraron planes de comida.</p>;
+  if (!planes.length)
+    return <p className="text-center text-gray-500 py-8">No se encontraron planes de comida.</p>;
   return (
     <div className="flex flex-col gap-3">
-      {planes.map(p => <MealPlanCard key={p.id} plan={p} onView={onView} onDelete={onDelete} />)}
+      {planes.map((p) => (
+        <MealPlanCard key={p.id} plan={p} onView={onView} onDelete={onDelete} />
+      ))}
     </div>
   );
 };

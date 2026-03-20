@@ -20,14 +20,20 @@ export const MealPlanEntryEditor: React.FC<MealPlanEntryEditorProps> = ({ receta
   const [showSelector, setShowSelector] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const recetaSeleccionada = recetas.find(r => r.id === idReceta);
-  const ingredientesReemplazables = recetaSeleccionada?.ingredientes?.filter(ri => ri.rol === 'reemplazable') ?? [];
+  const recetaSeleccionada = recetas.find((r) => r.id === idReceta);
+  const ingredientesReemplazables =
+    recetaSeleccionada?.ingredientes?.filter((ri) => ri.rol === 'reemplazable') ?? [];
 
   const handleAdd = async (ingredientesSeleccionados: Record<string, string> = {}) => {
     if (!fecha || !idReceta) return;
     setLoading(true);
     try {
-      await onAdd({ fecha, tipo_comida: tipoComida, id_receta: idReceta, ingredientes_seleccionados: ingredientesSeleccionados });
+      await onAdd({
+        fecha,
+        tipo_comida: tipoComida,
+        id_receta: idReceta,
+        ingredientes_seleccionados: ingredientesSeleccionados,
+      });
       setFecha('');
     } finally {
       setLoading(false);
@@ -44,19 +50,40 @@ export const MealPlanEntryEditor: React.FC<MealPlanEntryEditorProps> = ({ receta
     }
   };
 
-  const recetaOptions = recetas.map(r => ({ value: r.id, label: r.nombre }));
-  const tipoComidaOptions = TIPOS_COMIDA.map(m => ({ value: m, label: m }));
+  const recetaOptions = recetas.map((r) => ({ value: r.id, label: r.nombre }));
+  const tipoComidaOptions = TIPOS_COMIDA.map((m) => ({ value: m, label: m }));
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 border rounded-lg p-4 bg-gray-50">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-3 border rounded-lg p-4 bg-gray-50"
+      >
         <p className="text-sm font-medium text-gray-700">Agregar comida</p>
         <div className="grid grid-cols-2 gap-3">
-          <Input label="Fecha" type="date" value={fecha} onChange={e => setFecha(e.target.value)} required />
-          <Select label="Tipo de comida" value={tipoComida} onChange={e => setTipoComida(e.target.value as TipoComida)} options={tipoComidaOptions} />
+          <Input
+            label="Fecha"
+            type="date"
+            value={fecha}
+            onChange={(e) => setFecha(e.target.value)}
+            required
+          />
+          <Select
+            label="Tipo de comida"
+            value={tipoComida}
+            onChange={(e) => setTipoComida(e.target.value as TipoComida)}
+            options={tipoComidaOptions}
+          />
         </div>
-        <Select label="Receta" value={idReceta} onChange={e => setIdReceta(e.target.value)} options={recetaOptions} />
-        <Button type="submit" loading={loading}>Agregar al plan</Button>
+        <Select
+          label="Receta"
+          value={idReceta}
+          onChange={(e) => setIdReceta(e.target.value)}
+          options={recetaOptions}
+        />
+        <Button type="submit" loading={loading}>
+          Agregar al plan
+        </Button>
       </form>
 
       {showSelector && (

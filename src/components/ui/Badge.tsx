@@ -24,13 +24,16 @@ const colorMap: Record<string, string> = {
 interface BadgeProps {
   label: string;
   colorKey?: string;
+  className?: string;
 }
 
-export const Badge: React.FC<BadgeProps> = ({ label, colorKey }) => {
+export const Badge: React.FC<BadgeProps> = ({ label, colorKey, className }) => {
   const key = colorKey ?? label;
   const color = colorMap[key] ?? 'bg-gray-100 text-gray-600';
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${color}`}>
+    <span
+      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${color}${className ? ` ${className}` : ''}`}
+    >
       {label}
     </span>
   );

@@ -1,6 +1,13 @@
 export type GrupoNutricional =
-  | 'PROTEINAS' | 'CARBOHIDRATOS' | 'VERDURAS' | 'FRUTAS'
-  | 'LACTEOS' | 'GRASAS' | 'LEGUMBRES' | 'CEREALES' | 'OTRO';
+  | 'PROTEINAS'
+  | 'CARBOHIDRATOS'
+  | 'VERDURAS'
+  | 'FRUTAS'
+  | 'LACTEOS'
+  | 'GRASAS'
+  | 'LEGUMBRES'
+  | 'CEREALES'
+  | 'OTRO';
 
 export type RolIngrediente = 'requerido' | 'reemplazable' | 'opcional';
 export type TipoComida = 'desayuno' | 'almuerzo' | 'cena' | 'merienda';

@@ -14,7 +14,8 @@ React + TypeScript SPA for managing personal recipes and meal plans.
 ## Local Development
 
 ### Prerequisites
-- Node.js 18+
+
+- Node.js 20+
 - Backend running at `localhost:3001` (see [lista-de-comidas-backend](https://github.com/J8Ventures/lista-de-comidas-backend))
 
 ### Setup
@@ -26,21 +27,44 @@ npm run dev
 
 App available at http://localhost:5173. API requests to `/api/*` are proxied to `http://localhost:3001`.
 
-### Other commands
+### Commands
 
 ```bash
-npm run build    # TypeScript check + production build to dist/
-npm run preview  # Preview production build locally
-npm run lint     # ESLint
+npm run build         # TypeScript check + production build to dist/
+npm run preview       # Preview production build locally
+npm run lint          # ESLint check
+npm run format        # Apply Prettier formatting
+npm run format:check  # Check formatting without modifying files
+npm run type-check    # TypeScript check without building
+npm run test          # Run unit tests
+npm run test:watch    # Run tests in watch mode
+npm run coverage      # Run tests with coverage report
 ```
+
+## Testing
+
+Unit tests use [Vitest](https://vitest.dev/) with `@testing-library/react`.
+
+```bash
+npm run coverage
+```
+
+Tests live alongside source files as `*.test.ts` / `*.test.tsx`. Currently covers the services layer (`src/services/`).
 
 ## Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
+| Variable       | Description  | Default                            |
+| -------------- | ------------ | ---------------------------------- |
 | `VITE_API_URL` | API base URL | `/api/v1` (uses Vite proxy in dev) |
 
 Set `VITE_API_URL` to the API Gateway URL when deploying to production.
+
+## CI / CD
+
+GitHub Actions workflows run on every push:
+
+- **CI** (`.github/workflows/ci.yml`) — three parallel jobs: ESLint, TypeScript type-check, and Vitest with coverage report uploaded as an artifact.
+- **Format** (`.github/workflows/format.yml`) — runs on push to `main`; auto-applies Prettier formatting and ESLint fixes, then commits back with `[skip ci]`.
 
 ## Deployment
 

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Ingrediente, IngredienteCrear } from '../types';
-import { useIngredients, useCreateIngredient, useUpdateIngredient, useDeleteIngredient } from '../hooks/useIngredients';
+import {
+  useIngredients,
+  useCreateIngredient,
+  useUpdateIngredient,
+  useDeleteIngredient,
+} from '../hooks/useIngredients';
 import { IngredientList } from '../components/ingredients/IngredientList';
 import { IngredientForm } from '../components/ingredients/IngredientForm';
 import { Modal } from '../components/ui/Modal';
@@ -37,14 +42,28 @@ export const IngredientsPage: React.FC = () => {
         <Button onClick={() => setShowCreate(true)}>+ Nuevo ingrediente</Button>
       </div>
 
-      <IngredientList ingredientes={ingredientes} loading={isLoading} onEdit={setEditing} onDelete={handleDelete} />
+      <IngredientList
+        ingredientes={ingredientes}
+        loading={isLoading}
+        onEdit={setEditing}
+        onDelete={handleDelete}
+      />
 
       <Modal open={showCreate} onClose={() => setShowCreate(false)} title="Nuevo ingrediente">
-        <IngredientForm onSubmit={handleCreate} onCancel={() => setShowCreate(false)} loading={createMutation.isPending} />
+        <IngredientForm
+          onSubmit={handleCreate}
+          onCancel={() => setShowCreate(false)}
+          loading={createMutation.isPending}
+        />
       </Modal>
 
       <Modal open={!!editing} onClose={() => setEditing(null)} title="Editar ingrediente">
-        <IngredientForm initial={editing ?? undefined} onSubmit={handleUpdate} onCancel={() => setEditing(null)} loading={updateMutation.isPending} />
+        <IngredientForm
+          initial={editing ?? undefined}
+          onSubmit={handleUpdate}
+          onCancel={() => setEditing(null)}
+          loading={updateMutation.isPending}
+        />
       </Modal>
     </div>
   );

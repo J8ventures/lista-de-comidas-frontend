@@ -10,7 +10,11 @@ interface IngredientCardProps {
   onDelete: (id: string) => void;
 }
 
-export const IngredientCard: React.FC<IngredientCardProps> = ({ ingrediente, onEdit, onDelete }) => (
+export const IngredientCard: React.FC<IngredientCardProps> = ({
+  ingrediente,
+  onEdit,
+  onDelete,
+}) => (
   <Card>
     <div className="p-4 flex items-center justify-between">
       <div>
@@ -19,8 +23,12 @@ export const IngredientCard: React.FC<IngredientCardProps> = ({ ingrediente, onE
         <Badge label={ingrediente.grupo_nutricional} className="mt-1" />
       </div>
       <div className="flex gap-2">
-        <Button size="sm" variant="secondary" onClick={() => onEdit(ingrediente)}>Editar</Button>
-        <Button size="sm" variant="danger" onClick={() => onDelete(ingrediente.id)}>Eliminar</Button>
+        <Button size="sm" variant="secondary" onClick={() => onEdit(ingrediente)}>
+          Editar
+        </Button>
+        <Button size="sm" variant="danger" onClick={() => onDelete(ingrediente.id)}>
+          Eliminar
+        </Button>
       </div>
     </div>
   </Card>
