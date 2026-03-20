@@ -31,10 +31,19 @@ export const MealPlansPage: React.FC = () => {
         <Button onClick={() => setShowCreate(true)}>+ Nuevo plan</Button>
       </div>
 
-      <MealPlanList planes={planes} loading={isLoading} onView={id => navigate(`/planes-comida/${id}`)} onDelete={handleDelete} />
+      <MealPlanList
+        planes={planes}
+        loading={isLoading}
+        onView={(id) => navigate(`/planes-comida/${id}`)}
+        onDelete={handleDelete}
+      />
 
       <Modal open={showCreate} onClose={() => setShowCreate(false)} title="Nuevo plan de comida">
-        <MealPlanForm onSubmit={handleCreate} onCancel={() => setShowCreate(false)} loading={createMutation.isPending} />
+        <MealPlanForm
+          onSubmit={handleCreate}
+          onCancel={() => setShowCreate(false)}
+          loading={createMutation.isPending}
+        />
       </Modal>
     </div>
   );

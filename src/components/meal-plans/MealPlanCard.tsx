@@ -18,11 +18,17 @@ export const MealPlanCard: React.FC<MealPlanCardProps> = ({ plan, onView, onDele
         <div className="flex gap-2 mt-1">
           <Badge label={plan.tipo} />
         </div>
-        <p className="text-xs text-gray-400 mt-1">{plan.fecha_inicio} &rarr; {plan.fecha_fin}</p>
+        <p className="text-xs text-gray-400 mt-1">
+          {plan.fecha_inicio} &rarr; {plan.fecha_fin}
+        </p>
       </div>
-      <div className="flex gap-2" onClick={e => e.stopPropagation()}>
-        <Button size="sm" variant="secondary" onClick={() => onView(plan.id)}>Ver</Button>
-        <Button size="sm" variant="danger" onClick={() => onDelete(plan.id)}>Eliminar</Button>
+      <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+        <Button size="sm" variant="secondary" onClick={() => onView(plan.id)}>
+          Ver
+        </Button>
+        <Button size="sm" variant="danger" onClick={() => onDelete(plan.id)}>
+          Eliminar
+        </Button>
       </div>
     </div>
   </Card>

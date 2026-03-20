@@ -16,7 +16,9 @@ export const RecipeDetailPage: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <div className="flex items-center gap-4 mb-6">
-        <Button variant="ghost" onClick={() => navigate('/recetas')}>&larr; Volver</Button>
+        <Button variant="ghost" onClick={() => navigate('/recetas')}>
+          &larr; Volver
+        </Button>
         <h1 className="text-xl font-bold text-gray-900">{receta.nombre}</h1>
       </div>
       <RecipeDetail receta={receta} />

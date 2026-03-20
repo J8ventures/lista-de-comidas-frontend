@@ -31,10 +31,19 @@ export const RecipesPage: React.FC = () => {
         <Button onClick={() => setShowCreate(true)}>+ Nueva receta</Button>
       </div>
 
-      <RecipeList recetas={recetas} loading={isLoading} onView={id => navigate(`/recetas/${id}`)} onDelete={handleDelete} />
+      <RecipeList
+        recetas={recetas}
+        loading={isLoading}
+        onView={(id) => navigate(`/recetas/${id}`)}
+        onDelete={handleDelete}
+      />
 
       <Modal open={showCreate} onClose={() => setShowCreate(false)} title="Nueva receta" size="lg">
-        <RecipeForm onSubmit={handleCreate} onCancel={() => setShowCreate(false)} loading={createMutation.isPending} />
+        <RecipeForm
+          onSubmit={handleCreate}
+          onCancel={() => setShowCreate(false)}
+          loading={createMutation.isPending}
+        />
       </Modal>
     </div>
   );

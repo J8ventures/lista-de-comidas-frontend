@@ -9,7 +9,11 @@ interface MealPlanDetailProps {
   groceryList?: ListaCompras;
 }
 
-export const MealPlanDetail: React.FC<MealPlanDetailProps> = ({ plan, mealList = [], groceryList }) => (
+export const MealPlanDetail: React.FC<MealPlanDetailProps> = ({
+  plan,
+  mealList = [],
+  groceryList,
+}) => (
   <div className="flex flex-col gap-6">
     <Card>
       <div className="p-6">
@@ -17,7 +21,9 @@ export const MealPlanDetail: React.FC<MealPlanDetailProps> = ({ plan, mealList =
         <div className="flex gap-3 mt-2">
           <Badge label={plan.tipo} />
         </div>
-        <p className="text-sm text-gray-500 mt-2">{plan.fecha_inicio} &rarr; {plan.fecha_fin}</p>
+        <p className="text-sm text-gray-500 mt-2">
+          {plan.fecha_inicio} &rarr; {plan.fecha_fin}
+        </p>
       </div>
     </Card>
 
@@ -26,12 +32,14 @@ export const MealPlanDetail: React.FC<MealPlanDetailProps> = ({ plan, mealList =
         <div className="p-6">
           <h2 className="text-lg font-semibold mb-4">Horario de comidas</h2>
           <div className="flex flex-col gap-2">
-            {mealList.map(entrada => (
+            {mealList.map((entrada) => (
               <div key={entrada.id} className="flex items-center gap-3 py-2 border-b last:border-0">
                 <Badge label={entrada.tipo_comida} />
                 <div>
                   <p className="text-sm font-medium">{entrada.fecha}</p>
-                  <p className="text-xs text-gray-500">{entrada.receta?.nombre ?? entrada.id_receta}</p>
+                  <p className="text-xs text-gray-500">
+                    {entrada.receta?.nombre ?? entrada.id_receta}
+                  </p>
                 </div>
               </div>
             ))}

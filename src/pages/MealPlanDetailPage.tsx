@@ -1,6 +1,11 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useMealPlan, useAddMealPlanEntry, useMealList, useGroceryList } from '../hooks/useMealPlans';
+import {
+  useMealPlan,
+  useAddMealPlanEntry,
+  useMealList,
+  useGroceryList,
+} from '../hooks/useMealPlans';
 import { useRecipes } from '../hooks/useRecipes';
 import { MealPlanDetail } from '../components/meal-plans/MealPlanDetail';
 import { MealPlanEntryEditor } from '../components/meal-plans/MealPlanEntryEditor';
@@ -27,7 +32,9 @@ export const MealPlanDetailPage: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <div className="flex items-center gap-4 mb-6">
-        <Button variant="ghost" onClick={() => navigate('/planes-comida')}>&larr; Volver</Button>
+        <Button variant="ghost" onClick={() => navigate('/planes-comida')}>
+          &larr; Volver
+        </Button>
       </div>
       <MealPlanDetail plan={plan} mealList={mealList} groceryList={groceryList} />
       {recetas.length > 0 && (

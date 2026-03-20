@@ -14,12 +14,21 @@ interface RecipeFormProps {
 export const RecipeForm: React.FC<RecipeFormProps> = ({ onSubmit, onCancel, loading }) => {
   const { data: ingredientes = [] } = useIngredients();
   const [form, setForm] = useState<Omit<RecetaCrear, 'ingredientes'>>({
-    nombre: '', descripcion: '', porciones: 2, tiempo_preparacion: 15, tiempo_coccion: 30,
+    nombre: '',
+    descripcion: '',
+    porciones: 2,
+    tiempo_preparacion: 15,
+    tiempo_coccion: 30,
   });
   const [recetaIngredientes, setRecetaIngredientes] = useState<IngredienteRecetaCrear[]>([]);
 
-  const handle = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setForm(f => ({ ...f, [field]: field === 'nombre' || field === 'descripcion' ? e.target.value : Number(e.target.value) }));
+  const handle =
+    (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setForm((f) => ({
+        ...f,
+        [field]:
+          field === 'nombre' || field === 'descripcion' ? e.target.value : Number(e.target.value),
+      }));
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,17 +48,43 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ onSubmit, onCancel, load
         />
       </div>
       <div className="grid grid-cols-3 gap-3">
-        <Input label="Porciones" type="number" value={form.porciones} onChange={handle('porciones')} min={1} />
-        <Input label="Tiempo de preparación (min)" type="number" value={form.tiempo_preparacion} onChange={handle('tiempo_preparacion')} min={0} />
-        <Input label="Tiempo de cocción (min)" type="number" value={form.tiempo_coccion} onChange={handle('tiempo_coccion')} min={0} />
+        <Input
+          label="Porciones"
+          type="number"
+          value={form.porciones}
+          onChange={handle('porciones')}
+          min={1}
+        />
+        <Input
+          label="Tiempo de preparación (min)"
+          type="number"
+          value={form.tiempo_preparacion}
+          onChange={handle('tiempo_preparacion')}
+          min={0}
+        />
+        <Input
+          label="Tiempo de cocción (min)"
+          type="number"
+          value={form.tiempo_coccion}
+          onChange={handle('tiempo_coccion')}
+          min={0}
+        />
       </div>
       <div>
         <p className="text-sm font-medium text-gray-700 mb-2">Ingredientes</p>
-        <RecipeIngredientEditor ingredientes={ingredientes} value={recetaIngredientes} onChange={setRecetaIngredientes} />
+        <RecipeIngredientEditor
+          ingredientes={ingredientes}
+          value={recetaIngredientes}
+          onChange={setRecetaIngredientes}
+        />
       </div>
       <div className="flex gap-3 justify-end">
-        <Button type="button" variant="secondary" onClick={onCancel}>Cancelar</Button>
-        <Button type="submit" loading={loading}>Crear receta</Button>
+        <Button type="button" variant="secondary" onClick={onCancel}>
+          Cancelar
+        </Button>
+        <Button type="submit" loading={loading}>
+          Crear receta
+        </Button>
       </div>
     </form>
   );
